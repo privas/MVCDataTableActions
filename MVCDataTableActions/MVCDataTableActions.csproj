@@ -192,10 +192,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\DAL.cs" />
+    <Compile Include="Models\FileEntriesDb.cs" />
     <Compile Include="Models\FileEntryVM.cs" />
-    <Compile Include="Models\FileEntryModel.cs" />
+    <Compile Include="Models\FileEntry.cs" />
+    <Compile Include="Models\LOB.cs" />
+    <Compile Include="Models\Member.cs" />
+    <Compile Include="Models\Provider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

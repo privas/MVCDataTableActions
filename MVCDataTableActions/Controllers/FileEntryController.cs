@@ -10,14 +10,44 @@ namespace MVCDataTableActions.Controllers
 {
     public class FileEntryController : Controller
     {
-        public ActionResult Index()
+        FileEntriesDb _db = new FileEntriesDb();
+
+        public ActionResult Index(string searchTerm = null)
         {
-            DAL dal = new DAL();
-            FileEntryVM fileEntryVM = new FileEntryVM();
-            fileEntryVM.fileEntries = new List<FileEntry>();
-            fileEntryVM.fileEntries = dal.FileEntryMaster.ToList<FileEntry>();
-            return View(fileEntryVM);
+            var model =
+                _db.FileEntries
+                    .OrderByDescending(r => r.DOLoading)
+                    .Where(r => searchTerm == null || r.OriginalFileName.StartsWith(searchTerm))
+                    .Select(r => new FileEntryViewModel
+                            {
+                                ID = r.FileEntryID,
+                                SavedFileName = r.SavedFileName,
+                                OriginalFileName = r.OriginalFileName,
+                                DOS = r.DOService,
+                                DOL = r.DOLoading,
+                                Status = r.DOService.ToString()
+                            });
+
+                //from r in _db.FileEntries
+                //orderby r.DOLoading descending
+                //select new FileEntryViewModel
+                //{
+                //    ID = r.ID,
+                //    FileName = r.SavedFileName,
+                //    DOS = r.DOService,
+                //    DOL = r.DOLoading,
+                //    Status = r.DOService.ToString()
+                //};
+
+            return View(model);
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            if (_db != null)
+                _db.Dispose();
+
+            base.Dispose(disposing);
+        }
     }
 }
