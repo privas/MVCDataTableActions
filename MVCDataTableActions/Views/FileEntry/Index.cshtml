@@ -1,0 +1,13 @@
+﻿@model MVCDataTableActions.Models.FileEntryVM
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>File Entries</h2>
+<div style="display:'@Model.Status'">
+    @{
+        WebGrid wGrid = new WebGrid(Model.fileEntries);
+    }
+    @wGrid.GetHtml();
+</div>
