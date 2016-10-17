@@ -1,0 +1,68 @@
+﻿@model MVCDataTableActions.Models.FileEntry
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>FileEntry</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SavedFileName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SavedFileName)
+            @Html.ValidationMessageFor(model => model.SavedFileName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OriginalFileName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.OriginalFileName)
+            @Html.ValidationMessageFor(model => model.OriginalFileName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FileExtension)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FileExtension)
+            @Html.ValidationMessageFor(model => model.FileExtension)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DOLoading)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DOLoading)
+            @Html.ValidationMessageFor(model => model.DOLoading)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DOService)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DOService)
+            @Html.ValidationMessageFor(model => model.DOService)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

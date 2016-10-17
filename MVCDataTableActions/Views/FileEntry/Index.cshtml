@@ -1,21 +1,13 @@
-﻿@model IEnumerable<MVCDataTableActions.Models.FileEntryViewModel>
+﻿@model MVCDataTableActions.Models.Provider
+
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>File Entries</h2>
+<h2>Files for @Model.Name</h2>
 
-<form method="get">
-    <input type="search" name="searchTerm" />
-    <input type="submit" value="Search by File Name" />
-</form>
+@Html.Partial("_FileEntries", @Model.FileEntries)
 
-@foreach (var item in Model)
-{
-    <div>
-        <h4>@item.OriginalFileName</h4>
-        <div>
-            Original File Name : @item.SavedFileName  - submitted by @item.ProviderID on <small>@item.DOL.ToString();</small>
-        </div>
-    </div>
-}
+<p>
+    @Html.ActionLink("Create New", "Create", new { providerid = Model.ProviderID })
+</p>

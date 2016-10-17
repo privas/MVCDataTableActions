@@ -1,0 +1,47 @@
+﻿@model IEnumerable<MVCDataTableActions.Models.FileEntry>
+
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SavedFileName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OriginalFileName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FileExtension)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DOLoading)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DOService)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SavedFileName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OriginalFileName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FileExtension)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DOLoading)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DOService)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.FileEntryID }) |
+            </td>
+        </tr>
+    }
+
+</table>

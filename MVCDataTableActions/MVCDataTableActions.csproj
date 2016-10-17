@@ -188,6 +188,9 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\FileEntryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LOBController.cs" />
+    <Compile Include="Controllers\MembersController.cs" />
+    <Compile Include="Controllers\ProviderController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -274,7 +277,9 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -313,13 +318,32 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
+    <Content Include="Views\Provider\Index.cshtml" />
+    <Content Include="Views\Provider\Create.cshtml" />
+    <Content Include="Views\Provider\Edit.cshtml" />
+    <Content Include="Views\Provider\Delete.cshtml" />
+    <Content Include="Views\LOB\Index.cshtml" />
+    <Content Include="Views\LOB\Details.cshtml" />
+    <Content Include="Views\LOB\Create.cshtml" />
+    <Content Include="Views\LOB\Edit.cshtml" />
+    <Content Include="Views\LOB\Delete.cshtml" />
+    <Content Include="Views\Members\Index.cshtml" />
+    <Content Include="Views\Members\Details.cshtml" />
+    <Content Include="Views\Members\Create.cshtml" />
+    <Content Include="Views\Members\Edit.cshtml" />
+    <Content Include="Views\Members\Delete.cshtml" />
     <Content Include="Views\FileEntry\Index.cshtml" />
+    <Content Include="Views\FileEntry\_FileEntries.cshtml" />
+    <Content Include="Views\FileEntry\Create.cshtml" />
+    <Content Include="Views\FileEntry\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

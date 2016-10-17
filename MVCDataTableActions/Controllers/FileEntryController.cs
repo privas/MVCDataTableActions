@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data;
 
 using MVCDataTableActions.Models;
 
@@ -12,41 +13,56 @@ namespace MVCDataTableActions.Controllers
     {
         FileEntriesDb _db = new FileEntriesDb();
 
-        public ActionResult Index(string searchTerm = null)
+        public ActionResult Index([Bind(Prefix="id")] int providerid)
         {
-            var model =
-                _db.FileEntries
-                    .OrderByDescending(r => r.DOLoading)
-                    .Where(r => searchTerm == null || r.OriginalFileName.StartsWith(searchTerm))
-                    .Select(r => new FileEntryViewModel
-                            {
-                                ID = r.FileEntryID,
-                                SavedFileName = r.SavedFileName,
-                                OriginalFileName = r.OriginalFileName,
-                                DOS = r.DOService,
-                                DOL = r.DOLoading,
-                                Status = r.DOService.ToString()
-                            });
+            var provider = _db.Providers.Find(providerid);
+            if (provider != null)
+            {
+                return View(provider);
+            }
+            return HttpNotFound();
+        }
 
-                //from r in _db.FileEntries
-                //orderby r.DOLoading descending
-                //select new FileEntryViewModel
-                //{
-                //    ID = r.ID,
-                //    FileName = r.SavedFileName,
-                //    DOS = r.DOService,
-                //    DOL = r.DOLoading,
-                //    Status = r.DOService.ToString()
-                //};
+        [HttpGet]
+        public ActionResult Create(int providerid)
+        {
+            return View();
+        }
 
+        [HttpPost]
+        public ActionResult Create(FileEntry fileEntry)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.FileEntries.Add(fileEntry);
+                _db.SaveChanges();
+                return RedirectToAction("Index", new { id = fileEntry.ProviderID });
+            }
+            return View(fileEntry);
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var model = _db.FileEntries.Find(id);
             return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(FileEntry fileEntry)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Entry(fileEntry).State = System.Data.Entity.EntityState.Modified;
+                _db.SaveChanges();
+                return RedirectToAction("Index", new { id = fileEntry.ProviderID });
+            }
+            return View(fileEntry);
         }
 
         protected override void Dispose(bool disposing)
         {
-            if (_db != null)
-                _db.Dispose();
-
+            _db.Dispose();
             base.Dispose(disposing);
         }
     }
